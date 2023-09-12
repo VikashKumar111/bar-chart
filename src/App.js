@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js/auto';
+import { useState } from 'react';
+import { Data } from './utils/Data';
 import './App.css';
+Chart.register((CategoryScale));
 
 function App() {
+  const [chartData, setChartData] = useState({
+    labels: Data.map((data) => data.year),
+    datasets: [
+      {
+        label: "Users Gained",
+        data: Data.map((data) => data.userGain),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      }
+    ]
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>Using Chart.js in React</p>
     </div>
   );
 }
